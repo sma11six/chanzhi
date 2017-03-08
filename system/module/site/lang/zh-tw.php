@@ -64,7 +64,6 @@ $lang->site->checkEmail       = '會員郵箱綁定';
 $lang->site->filterFunction   = '過濾功能';
 $lang->site->allowedLocation  = '允許登錄地區';
 $lang->site->checkSessionIP   = '後台檢查IP';
-$lang->site->forceYangcong    = '後台強制洋蔥登錄';
 $lang->site->setsecurity      = '安全設置';
 $lang->site->setsensitive     = '敏感詞設置';
 $lang->site->filterSensitive  = '敏感詞過濾';
@@ -90,7 +89,6 @@ $lang->site->setUpload     = "附件上傳";
 $lang->site->setRobots     = "Robots 設置";
 $lang->site->setOauth      = "開放登錄";
 $lang->site->setSinaOauth  = "新浪微博接入";
-$lang->site->setYangcong   = "洋蔥登錄設置";
 $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用幫助";
 $lang->site->setRecPerPage = "列表數量設置";
@@ -115,10 +113,6 @@ $lang->site->statusList->pause  = '暫停';
 $lang->site->resetPasswordList = array();
 $lang->site->resetPasswordList['open']  = '開啟';
 $lang->site->resetPasswordList['close'] = '關閉';
-
-$lang->site->forceYangcongList = array();
-$lang->site->forceYangcongList['open']  = '開啟';
-$lang->site->forceYangcongList['close'] = '關閉';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = '開啟';
@@ -174,11 +168,11 @@ $lang->site->scoreList['close'] = '禁用';
 $lang->site->cdnList['open']  = '啟用';
 $lang->site->cdnList['close'] = '關閉';
 
-$lang->site->cacheTypes['close'] = '關閉';
 $lang->site->cacheTypes['file']  = '啟用';
+$lang->site->cacheTypes['close'] = '關閉';
 
-$lang->site->cachePageOptions['close'] = '關閉';
 $lang->site->cachePageOptions['open']  = '開啟';
+$lang->site->cachePageOptions['close'] = '關閉';
 
 $lang->site->filterFunctionList['open']  = '啟用';
 $lang->site->filterFunctionList['close'] = '關閉';
@@ -194,9 +188,9 @@ $lang->site->moduleAvailable->content['book']       = '手冊';
 $lang->site->moduleAvailable->user = array();
 $lang->site->moduleAvailable->user['user']       = '會員';
 $lang->site->moduleAvailable->user['forum']      = '論壇';
-$lang->site->moduleAvailable->user['message']    = '評論留言';
-$lang->site->moduleAvailable->user['submittion'] = '投稿';
 $lang->site->moduleAvailable->user['score']      = '積分';
+$lang->site->moduleAvailable->user['message']    = '評論留言';
+$lang->site->moduleAvailable->user['submission'] = '投稿';
 
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = '商城';
@@ -216,7 +210,6 @@ $lang->site->changeLocation   = '您當前的登錄地區與允許登錄地區�
 $lang->site->sessionIpTip     = '開啟後，如IP變化將自動退出登錄。';
 $lang->site->schemeTip        = '所有訪問會跳轉至預設訪問協議。';
 $lang->site->saveDaysTip      = '訪問日誌保存天數必須為為 >0 的數字。';
-$lang->site->yangcongTip      = '開啟強制洋蔥登錄後，您可以通過設置密保問題開啟密保登錄作為備用。';
 $lang->site->closeScoreTip    = '禁用積分功能後不再記錄積分，會員保持原有積分不變。';
 $lang->site->cdnFileLost      = '以下資源無法訪問：';
 $lang->site->useDefaultCdn    = '使用預設地址';
@@ -237,11 +230,6 @@ $lang->site->customizableList->reply   = '回帖列表數量';
 $lang->site->customizableList->message = '留言列表數量';
 $lang->site->customizableList->comment = '評論列表數量';
 
-$lang->site->yangcong = new stdclass();
-$lang->site->yangcong->appID = 'APP ID';
-$lang->site->yangcong->key   = 'APP KEY';
-$lang->site->yangcong->auth  = 'Auth ID';
-
 $lang->site->api = new stdclass();
 $lang->site->api->common = '整合';
 $lang->site->api->key    = '密鑰';
@@ -252,15 +240,13 @@ $lang->site->api->ipTip  = '允許調用者使用這些IP訪問，多個IP使用
 $lang->site->menus = array();
 $lang->site->menus['order']      = '訂單';
 $lang->site->menus['message']    = '留言';
-$lang->site->menus['comment']    = '評論';
-$lang->site->menus['reply']      = '回覆';
 $lang->site->menus['thread']     = '主題';
 $lang->site->menus['forumreply'] = '回帖';
 $lang->site->menus['article']    = '文章';
 $lang->site->menus['page']       = '單頁';
 $lang->site->menus['blog']       = '博客';
 $lang->site->menus['book']       = '手冊';
-$lang->site->menus['submittion'] = '投稿';
+$lang->site->menus['submission'] = '投稿';
 $lang->site->menus['product']    = '產品';
 $lang->site->menus['user']       = '會員';
 $lang->site->menus['wechat']     = '微信';
@@ -272,3 +258,5 @@ $lang->site->menus['security']   = '安全';
 
 $lang->site->fileAuthority = '需要修改寫入檔案的權限，Linux下的運行命令為<code>%s</code>';
 $lang->site->fileRequired  = '需要創建檔案，Linux下的運行命令為<code>%s</code>';
+
+$lang->site->wechatLoginTip = '使用微信登錄需要開啟PHP的openssl擴展';

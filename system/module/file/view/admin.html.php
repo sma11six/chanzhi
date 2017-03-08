@@ -1,10 +1,19 @@
 <?php if(!defined("RUN_MODE")) die();?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('deletingTip', $lang->file->deletingTip);?>
+<?php js::set('deletedTip', $lang->file->deletedTip);?>
+<?php js::set('failDeleteTip', $lang->file->failDeleteTip);?>
 <div class='panel'>
   <div class='panel-heading' style='height:39px;'>
-    <strong>
-      <?php echo '<i class="icon icon-list-alt"></i> ' . $lang->file->fileList;?>
-    </strong>
+    <ul id='typeNav' class='nav nav-tabs pull-left'>
+      <li class='<?php echo $type == 'valid' ? 'active' : '';?>' data-type='internal' ><?php echo html::a(inlink('admin', "type=valid"), $lang->file->fileList);?></li>
+      <li class='<?php echo $type == 'invalid' ? 'active' : '';?>' data-type='internal' ><?php echo html::a(inlink('admin', "type=invalid"), $lang->file->invalidFile);?></li>
+    </ul>
+    <?php if($type == 'invalid'):?>
+      <div class='panel-actions'>
+        <?php echo html::a(inlink('deleteAllInvalid'), $lang->file->clearAllInvalid, 'class="btn btn-primary pull-right" id="deleteAllButton"');?>
+      </div>
+    <?php endif;?>
   </div>
   <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
     <?php if($type == 'valid'):?>
@@ -58,7 +67,7 @@
         </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='3' class='text-right'><?php echo $lang->file->fileTip;?></td><td colspan='5'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='3' class='text-left'><?php echo $lang->file->fileTip;?></td><td colspan='5'><?php $pager->show('right', 'lite');?></td></tr></tfoot>
     <?php else:?>
     <thead>
       <tr class='text-center'>
@@ -85,6 +94,7 @@
         </tr>
       <?php endforeach;?>
     </tbody>
+    <tfoot><tr><td colspan='5'><?php $pager->show('right', 'lite');?></td></tr></tfoot>
     <?php endif;?>
   </table>
 </div>

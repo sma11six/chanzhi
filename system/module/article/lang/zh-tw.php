@@ -50,21 +50,21 @@ $lang->article->selectCategories = '選擇類目';
 $lang->article->selectBoard      = '選擇版塊';
 $lang->article->confirmReject    = '確認駁回這篇投稿？';
 
-$lang->submittion= new stdclass();
-$lang->submittion->common  = '投稿';
-$lang->submittion->check   = '審核';
-$lang->submittion->list    = '投稿列表';
-$lang->submittion->publish = '發佈';
-$lang->submittion->reject  = '駁回';
+$lang->submission= new stdclass();
+$lang->submission->common  = '投稿';
+$lang->submission->check   = '審核';
+$lang->submission->list    = '投稿列表';
+$lang->submission->publish = '發佈';
+$lang->submission->reject  = '駁回';
 
-$lang->submittion->status[0] = '';
-$lang->submittion->status[1] = '<span class="label label-xsm label-primary">' . '待審核' .'</span>';
-$lang->submittion->status[2] = '<span class="label label-xsm label-success">' . '通過' . '</span>';
-$lang->submittion->status[3] = '駁回';
+$lang->submission->status[0] = '';
+$lang->submission->status[1] = '<span class="label label-xsm label-primary">' . '待審核' .'</span>';
+$lang->submission->status[2] = '<span class="label label-xsm label-success">' . '通過' . '</span>';
+$lang->submission->status[3] = '駁回';
 
-$lang->submittion->typeList = array();
-$lang->submittion->typeList['article'] = '文章';
-$lang->submittion->typeList['blog']    = '博客';
+$lang->submission->typeList = array();
+$lang->submission->typeList['article'] = '文章';
+$lang->submission->typeList['blog']    = '博客';
 
 $lang->article->onlyBody = '不顯示頭部、側邊和底部(可定製性更強)';
 
@@ -77,13 +77,13 @@ $lang->article->edit          = '編輯文章';
 $lang->article->files         = '附件';
 $lang->article->images        = '圖片';
 
-$lang->article->submittion     = '投稿';
+$lang->article->submission     = '投稿';
 $lang->article->submissionTime = '投遞時間';
-$lang->article->noSubmittion   = '您還沒有投稿記錄，歡迎您提交投稿賺取積分，分享宣傳。';
+$lang->article->noSubmission   = '您還沒有投稿記錄，歡迎您提交投稿賺取積分，分享宣傳。';
 
-$lang->article->submittionOptions = new stdclass;
-$lang->article->submittionOptions->open  = '開啟';
-$lang->article->submittionOptions->close = '關閉';
+$lang->article->submissionOptions = new stdclass;
+$lang->article->submissionOptions->open  = '開啟';
+$lang->article->submissionOptions->close = '關閉';
 
 $lang->blog->common = '博客';
 $lang->blog->admin  = '維護博客';
@@ -137,3 +137,10 @@ $lang->article->approveMessage = '您投遞的文章 <strong>《%s》</strong> �
 $lang->article->rejectMessage  = '您投遞的文章 <strong>《%s》</strong> 未通過審核，您可以編輯後再次提交審核，感謝您的支持。';
 
 $lang->article->forwardFrom = '轉發自';
+
+$lang->article->noCategoriesTip = '您還沒有添加類目，請添加類目。';
+
+$lang->article->noCategories = array();
+$lang->article->noCategories['article'] = '您還沒有為文章添加類目，請添加類目。';
+$lang->article->noCategories['blog']    = '您還沒有為博客添加類目，請添加類目。';
+$lang->article->noCategories['video']   = '您還沒有為視頻添加類目，請添加類目。';

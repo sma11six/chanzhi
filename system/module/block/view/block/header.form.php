@@ -15,8 +15,9 @@
 
 <?php if(!isset($block)) $block = new stdclass();?>
 <?php if(!isset($block->content)) $block->content = new stdclass();?>
+<?php js::set('noInsertTip', $lang->block->noInsertTip);?>
 <tr class='top'>
-  <th rowspan='2'><?php echo $lang->block->header->top->common;?></th>
+  <th id='tableHeadingtop' rowspan='2'><?php echo $lang->block->header->top->common;?></th>
   <td class='w-p45'>
     <div class='input-group'>
       <span class='input-group-addon'><?php echo $lang->block->header->top->left;?></span>
@@ -35,6 +36,16 @@
     </div>
   </td>
   <td></td>
+</tr>
+<tr class='top topRight hide'>
+  <td>
+    <?php echo html::textarea("params[topRightContent]", isset($block->content->topRightContent) ? $block->content->topRightContent : '', "class='form-control textarea-withchosen' rows='5'");?>
+    <div class='textarea-chosen'>
+        <?php echo html::a('javascript:;', $lang->block->header->top->rightOptions['login'], "id='login' class='btn btn-xs btn-addChoice btn-default btn-select'");?>
+        <?php echo html::a('javascript:;', $lang->block->header->top->rightOptions['search'], "id='search' class='btn btn-xs btn-addChoice btn-default btn-select'");?>
+    </div>
+    <p></p>
+  </td>
 </tr>
 <tr class='middle'>
   <th><?php echo $lang->block->header->middle->common;?></th>
@@ -61,6 +72,30 @@
   </td>
 </tr>
 <script>
+$(".btn-addChoice").click(function(){
+    choiceItem      = this.id;
+    topRightContent = $("[name*=params][name*=topRightContent]").val();
+    topRightContent += '$' + choiceItem.toUpperCase() + ' ';
+
+    if(!checkChoiceInserted($("[name*=params][name*=topRightContent]").val(), choiceItem)) 
+    {
+        $("[name*=params][name*=topRightContent]").val(topRightContent); 
+    }
+});
+
+var checkChoiceInserted = function(searchedStr, searchItem){
+    if(searchItem == 'login')
+    {
+        if(searchedStr.indexOf('$LOGIN') >= 0) return true;
+    }
+    if(searchItem == 'search')
+    {
+        if(searchedStr.indexOf('$SEARCH') >= 0) return true;
+    }
+    
+    return false;
+};
+
 $(function()
 {
     $('#compatible').change(function()
@@ -74,15 +109,57 @@ $(function()
         if($(this).val() == 'custom')
         {
             $('tr.topLeft').show();
-            $(this).parents('tr').find('th').attr('rowspan', '3');
+            if($("[name*=params][name*=top][name*=right]").val() == 'custom')
+            {
+                $("#tableHeadingtop").attr('rowspan', '4');
+            }
+            else
+            {
+                $("#tableHeadingtop").attr('rowspan', '3');
+            }
         }
         else
         {
             $('tr.topLeft').hide();
-            $(this).parents('tr').find('th').attr('rowspan', '2');
+            if($("[name*=params][name*=top][name*=right]").val() == 'custom')
+            {
+                $("#tableHeadingtop").attr('rowspan', '3');
+            }
+            else
+            {
+                $("#tableHeadingtop").attr('rowspan', '2');
+            }
         }
     })
 
+    $("[name*=params][name*=top][name*=right]").change(function()
+    {
+        if($(this).val() == 'custom')
+        {
+            $('tr.topRight').show();
+            if($("[name*=params][name*=top][name*=left]").val() == 'custom')
+            {
+                $("#tableHeadingtop").attr('rowspan', '4');
+            }
+            else
+            {
+                $("#tableHeadingtop").attr('rowspan', '3');
+            }
+        }
+        else
+        {
+            $('tr.topRight').hide();
+            if($("[name*=params][name*=top][name*=left]").val() == 'custom')
+            {
+                $("#tableHeadingtop").attr('rowspan', '3');
+            }
+            else
+            {
+                $("#tableHeadingtop").attr('rowspan', '2');
+            }
+        }
+    })
     $("[name*=params][name*=top][name*=left]").change();
+    $("[name*=params][name*=top][name*=right]").change();
 })
 </script>

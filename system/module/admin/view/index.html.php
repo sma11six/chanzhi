@@ -12,12 +12,13 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php $urlScheme = isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http';?>
 <div class='container' id='shortcutBox'>
   <div id='dashboardWrapper'>
     <div class='panels-container dashboard' id='dashboard'>
-      <div class='dashboard-control'>
+      <div class='dashboard-control' data-toggle='tooltip' title data-placement="top" data-original-title='<?php echo $lang->widget->create; ?>'>
         <div class='pull-right'>
-          <a class='btn' data-toggle='modal' href='<?php echo $this->createLink("widget", "create"); ?>'><i  data-toggle='tooltip' class='icon-plus' title='<?php echo $lang->widget->create; ?>'></i></a>
+          <a class='btn' data-toggle='modal' href='<?php echo $this->createLink("widget", "create"); ?>'><i  class='icon-plus'></i></a>
         </div>
       </div>
       <div class='row summary'>
@@ -64,7 +65,7 @@
             <?php else:?>
             <div id='chanzhiDynamic'></div>
             <script>function afterDynmaicsLoad(html){$('#chanzhiDynamic').html(html);}</script>
-            <script async src='http://api.chanzhi.org/goto.php?item=dynamics_jsonp&extra=afterDynmaicsLoad'></script>
+            <script async src='<?php echo $urlScheme;?>://api.chanzhi.org/goto.php?item=dynamics_jsonp&extra=afterDynmaicsLoad'></script>
             <?php endif;?>
           </div>
         </div>
@@ -108,7 +109,7 @@ function afterCheckVersion(latest)
   }
 }
 </script>
-<script async src='<?php echo 'http://api.chanzhi.org/latest.php?version=' . $this->config->version . '&type=afterCheckVersion';?>'></script>
+<script async src='<?php echo $urlScheme . '://api.chanzhi.org/latest.php?version=' . $this->config->version . '&type=afterCheckVersion';?>'></script>
 <?php endif;?>
 
 <?php if(!$checkLocation):?>

@@ -33,7 +33,7 @@ $config->framework->detectDevice['zh-tw'] = true; // 在zh-tw语言情况下，�
 $config->framework->detectDevice['en']    = true; // 在en语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
 
 /* The basic settings. */
-$config->version     = '5.6';           // The version number, don't change.
+$config->version     = '6.0';           // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
@@ -61,8 +61,8 @@ $config->searchWordPlaceHolder = 'SEARCHWORD_PLACEHOLDER';
 
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
-$config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><ol><ul><li><img><a><b><font><hr><pre><embed>';           // For front mode.
-$config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><table><td><th><tr><tbody><iframe><style><header><nav><meta>'; // For admin users.
+$config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><ol><ul><li><img><a><b><font><hr><pre><embed><video>';           // For front mode.
+$config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><table><td><th><tr><tbody><iframe><style><header><nav><meta><video>'; // For admin users.
 
 /* The methods should not display the exec infomation*/
 $config->ignoreExecInfoPages = array();
@@ -204,8 +204,8 @@ $config->dependence->score[]        = 'score';
 $config->dependence->score[]        = 'user';
 $config->dependence->stat[]         = 'stat';
 $config->dependence->log[]          = 'stat';
-$config->dependence->submittion[]   = 'submittion';
-$config->dependence->submittion[]   = 'user';
+$config->dependence->submission[]   = 'submission';
+$config->dependence->submission[]   = 'user';
 $config->dependence->orderSetting[] = 'product';
 $config->dependence->comment[]      = 'message';
 $config->dependence->wechat[]       = 'user';

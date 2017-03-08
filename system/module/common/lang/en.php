@@ -43,7 +43,7 @@ $lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://www
 $lang->newVersion     = "Note: Changer CMS has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL query：<b>%s</b> <br> Memory footprint: <b>%s</b><br> PHP E-time: <b>%s</b> s</span></span>";
 $lang->customCssError = "Fail to load the self-defined css file, if you are the administrator of this site, please reset the apperence of the site in the admin";
-$lang->redirecting    = "Redirecting to %s，<a href='%s'>Redirect immediately</a>";
+$lang->redirecting    = "<span class='text-muted'>After <span id='countDown'>3</span> seconds, Redirecting to manage categories......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>Redirect</a>";
 
 /* Global lang items. */
 $lang->home             = 'Home';
@@ -53,7 +53,7 @@ $lang->messages         = "<strong><i class='icon-comment-alt'></i> %s</strong>"
 $lang->todayIs          = 'Today is %s，';
 $lang->aboutUs          = 'About Us';
 $lang->link             = 'Links';
-$lang->frontHome        = 'FrontEnd';
+$lang->frontHome        = 'Front';
 $lang->forumHome        = 'Forum';
 $lang->bookHome         = 'Book';
 $lang->dashboard        = 'Dashboard';
@@ -87,7 +87,7 @@ $lang->delete         = 'Delete';
 $lang->close          = 'Close';
 $lang->save           = 'Save';
 $lang->confirm        = 'Confirm';
-$lang->addToBlacklist = 'Widget';
+$lang->addToBlacklist = 'Block';
 $lang->send           = 'Send';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
@@ -108,6 +108,7 @@ $lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No match found!';
 $lang->alias          = 'For SEO, use letters and numbers.';
 $lang->keywordsHolder = 'Use commas to separate keywords.';
+$lang->autoUpgrade    = 'Auto upgrade';
 
 $lang->setOkFile = <<<EOT
 <h5>Please confirm your admin account by following steps below.</h5>
@@ -128,6 +129,12 @@ $lang->getEmailCodeByApi  = 'Get email code by api';
 $lang->checkEmail         = 'Check email';
 $lang->checkMobile        = 'Check mobile';
 $lang->getUserByApi       = 'Get user info by api';
+
+/* Select lang tip */
+$lang->selectLangTip = array();
+$lang->selectLangTip['zh-cn'] = 'Switch to simplified Chinese site';
+$lang->selectLangTip['zh-tw'] = 'Switch to traditional Chinese site';
+$lang->selectLangTip['en']    = 'Switch to English site';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -170,7 +177,7 @@ $lang->groups->shop     = array('title' => 'Mall', 'link' => 'order|admin|',    
 $lang->groups->user     = array('title' => 'User', 'link' => 'user|admin|',                'icon' => 'group');
 $lang->groups->promote  = array('title' => 'SEO', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
 $lang->groups->design   = array('title' => 'UI', 'link' => 'ui|settemplate|',            'icon' => 'paint-brush');
-$lang->groups->open     = array('title' => 'Ext', 'link' => 'package|browse|',            'icon' => 'cloud');
+$lang->groups->open     = array('title' => 'Open', 'link' => 'package|browse|',            'icon' => 'cloud');
 $lang->groups->setting  = array('title' => 'Set', 'link' => 'site|setbasic|',             'icon' => 'cog');
 
 /* The main menus. */
@@ -187,14 +194,13 @@ $lang->menu->product      = 'Product|product|admin|';
 $lang->menu->orderSetting = 'Settings|product|setting|';
 
 $lang->menu->user         = 'User|user|admin|';
-$lang->menu->message      = 'Message|message|admin|type=message';
-$lang->menu->comment      = 'Comment|message|admin|type=comment';
-$lang->menu->reply        = 'Reply|message|admin|type=reply';
+$lang->menu->message      = 'Message|message|admin|';
 $lang->menu->forum        = 'Forum|forum|admin|';
 $lang->menu->thread       = 'Thread|forum|admin|';
 $lang->menu->forumreply   = 'Post|reply|admin|';
-$lang->menu->submittion   = 'Submission|article|admin|type=submittion&tab=user';
+$lang->menu->submission   = 'Submission|article|admin|type=submission&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
+$lang->menu->userSetting  = 'Setting|user|setting|';
 
 $lang->menu->stat    = 'Stats|stat|traffic|';
 $lang->menu->tag     = 'Keywords|tag|admin|';
@@ -222,13 +228,13 @@ $lang->menu->community  = 'Community|admin|register|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
-$lang->menuGroups->mail    = 'site';
-$lang->menuGroups->wechat  = 'site';
+$lang->menuGroups->mail    = 'interface';
+$lang->menuGroups->wechat  = 'interface';
 $lang->menuGroups->group   = 'security';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
-$lang->menuGroups->company = 'site';
-$lang->menuGroups->score   = 'site';
+$lang->menuGroups->company = 'company';
+$lang->menuGroups->score   = 'score';
 $lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
@@ -252,6 +258,12 @@ $lang->orderSetting = new stdclass();
 $lang->orderSetting->menu = new stdclass();
 $lang->orderSetting->menu->orderSetting = 'Settings|product|setting|';
 $lang->orderSetting->menu->express      = 'Shipping Carrier|tree|browse|type=express';
+
+$lang->userSetting = new stdclass();
+$lang->userSetting->menu = new stdclass();
+$lang->userSetting->menu->userSetting   = 'User Setting|user|setting|';
+$lang->userSetting->menu->score         = 'Score Rule|score|setcounts|';
+$lang->userSetting->menu->stateinfo     = 'Score Compute|score|showstateinfo|';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -308,16 +320,17 @@ $lang->company->menu->contact   = 'Contact|company|setcontact|';
 /* Menu of security module. */
 $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
-$lang->security->menu->basic     = 'Basic Settings|site|setsecurity|';
-$lang->security->menu->filter    = 'Filter|site|setfilter|';
-$lang->security->menu->blacklist = 'Blacklist|guarder|setblacklist|';
-$lang->security->menu->whitelist = 'Whitelist|guarder|setwhitelist|';
-$lang->security->menu->sensitive = 'Sensitive Words|site|setsensitive|';
-$lang->security->menu->captcha   = 'Security Questions|guarder|setcaptcha|';
-$lang->security->menu->upload    = 'File Upload|site|setupload|';
-$lang->security->menu->admin     = 'Administrators|user|admin|admin=1';
-$lang->security->menu->group     = array('link' => 'Group Privilege|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->security->menu->log       = 'Login Log|user|adminlog|';
+$lang->security->menu->basic       = 'Basic Settings|site|setsecurity|';
+$lang->security->menu->filter      = 'Filter|site|setfilter|';
+$lang->security->menu->blacklist   = 'Blacklist|guarder|setblacklist|';
+$lang->security->menu->whitelist   = 'Whitelist|guarder|setwhitelist|';
+$lang->security->menu->sensitive   = 'Sensitive Words|site|setsensitive|';
+$lang->security->menu->userSetting = '会员设置|user|setting|';
+$lang->security->menu->captcha     = 'Security Questions|guarder|setcaptcha|';
+$lang->security->menu->upload      = 'File Upload|site|setupload|';
+$lang->security->menu->admin       = 'Administrators|user|admin|admin=1';
+$lang->security->menu->group       = array('link' => 'Group Privilege|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->log         = 'Login Log|user|adminlog|';
 
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
@@ -326,9 +339,9 @@ $lang->interface->menu->mail   = array('link' => 'Email|mail|admin|', 'alias' =>
 $lang->interface->menu->wechat = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
-$lang->score->menu = $lang->site->menu;
+$lang->score->menu = new stdclass();
 $lang->score->menu->score     = 'Point Rules|score|setcounts|';
-$lang->score->menu->stateInfo = 'Point Info|score|showstateinfo|';
+$lang->score->menu->stateinfo = 'Point Info|score|showstateinfo|';
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();

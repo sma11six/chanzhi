@@ -10,7 +10,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->thread->common    = 'Theme';
+$lang->thread->common    = 'Subject';
 
 $lang->thread->id          = 'ID';
 $lang->thread->title       = 'Title';

@@ -43,7 +43,7 @@ $lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.or
 $lang->newVersion     = "提示：蝉知系统已于 <span id='releaseDate'></span> 发布 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>马上下载</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL查询：<b>%s</b> 次<br>内存占用：<b>%s</b><br> PHP 执行时间：<b>%s</b> 秒</span></span>";
 $lang->customCssError = "不能生成样式文件，如果您是网站管理员，请到网站后台外观管理重新设置样式文件";
-$lang->redirecting    = "<span class='text-muted'>正在跳转请稍后......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳转</a>";
+$lang->redirecting    = "<span class='text-muted'><span id='countDown'>3</span>秒后跳转到类目管理页面......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳转</a>";
 
 /* Global lang items. */
 $lang->home             = '首页';
@@ -108,6 +108,7 @@ $lang->fail           = '失败';
 $lang->noResultsMatch = '没有匹配的选项';
 $lang->alias          = '搜索引擎优化使用，可使用英文或数字';
 $lang->keywordsHolder = '多个关键字中间用逗号隔开';
+$lang->autoUpgrade    = '自动升级';
 
 $lang->setOkFile = <<<EOT
 <h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
@@ -128,6 +129,12 @@ $lang->getEmailCodeByApi  = '获取邮箱验证码';
 $lang->checkEmail         = '验证邮箱';
 $lang->checkMobile        = '验证手机';
 $lang->getUserByApi       = '获取绑定信息';
+
+/* Select lang tip */
+$lang->selectLangTip = array();
+$lang->selectLangTip['zh-cn'] = '切换到简体中文站点';
+$lang->selectLangTip['zh-tw'] = '切换到繁体中文站点';
+$lang->selectLangTip['en']    = '切换到英文站点';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -187,14 +194,13 @@ $lang->menu->product      = '产品|product|admin|';
 $lang->menu->orderSetting = '设置|product|setting|';
 
 $lang->menu->user         = '会员|user|admin|';
-$lang->menu->message      = '留言|message|admin|type=message';
-$lang->menu->comment      = '评论|message|admin|type=comment';
-$lang->menu->reply        = '回复|message|admin|type=reply';
+$lang->menu->message      = '反馈|message|admin|';
 $lang->menu->forum        = '论坛|forum|admin|';
 $lang->menu->thread       = '主题|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
-$lang->menu->submittion   = '投稿|article|admin|type=submittion&tab=user';
+$lang->menu->submission   = '投稿|article|admin|type=submission&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
+$lang->menu->userSetting  = '设置|user|setting|';
 
 $lang->menu->stat    = '统计|stat|traffic|';
 $lang->menu->tag     = '关键词|tag|admin|';
@@ -253,6 +259,12 @@ $lang->orderSetting->menu = new stdclass();
 $lang->orderSetting->menu->orderSetting = '设置|product|setting|';
 $lang->orderSetting->menu->express      = '快递|tree|browse|type=express';
 
+$lang->userSetting = new stdclass();
+$lang->userSetting->menu = new stdclass();
+$lang->userSetting->menu->userSetting   = '会员设置|user|setting|';
+$lang->userSetting->menu->score         = '积分规则|score|setcounts|';
+$lang->userSetting->menu->stateinfo     = '积分结算|score|showstateinfo|';
+
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
@@ -308,16 +320,17 @@ $lang->company->menu->contact   = '联系方式|company|setcontact|';
 /* Menu of security module. */
 $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
-$lang->security->menu->basic     = '基本设置|site|setsecurity|';
-$lang->security->menu->filter    = '过滤设置|site|setfilter|';
-$lang->security->menu->blacklist = '黑名单管理|guarder|setblacklist|';
-$lang->security->menu->whitelist = '白名单管理|guarder|setwhitelist|';
-$lang->security->menu->sensitive = '敏感词设置|site|setsensitive|';
-$lang->security->menu->captcha   = '验证码设置|guarder|setcaptcha|';
-$lang->security->menu->upload    = '附件上传|site|setupload|';
-$lang->security->menu->admin     = '管理员|user|admin|admin=1';
-$lang->security->menu->group     = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->security->menu->log       = '登录日志|user|adminlog|';
+$lang->security->menu->basic       = '基本设置|site|setsecurity|';
+$lang->security->menu->filter      = '过滤设置|site|setfilter|';
+$lang->security->menu->blacklist   = '黑名单管理|guarder|setblacklist|';
+$lang->security->menu->whitelist   = '白名单管理|guarder|setwhitelist|';
+$lang->security->menu->sensitive   = '敏感词设置|site|setsensitive|';
+$lang->security->menu->userSetting = '会员设置|user|setting|';
+$lang->security->menu->captcha     = '验证码设置|guarder|setcaptcha|';
+$lang->security->menu->upload      = '附件上传|site|setupload|';
+$lang->security->menu->admin       = '管理员|user|admin|admin=1';
+$lang->security->menu->group       = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->log         = '登录日志|user|adminlog|';
 
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
@@ -328,7 +341,7 @@ $lang->interface->menu->wechat = array('link' => '微信设置|wechat|admin|', '
 /* Menu of score module. */
 $lang->score->menu = new stdclass();
 $lang->score->menu->score     = '积分规则|score|setcounts|';
-$lang->score->menu->stateInfo = '积分结算|score|showstateinfo|';
+$lang->score->menu->stateinfo = '积分结算|score|showstateinfo|';
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();

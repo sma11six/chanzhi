@@ -1,7 +1,5 @@
 <?php if(!defined("RUN_MODE")) die();?>
 <?php
-$config->yangcong = new stdclass();
-
 $config->site->help['sina'] = 'http://www.chanzhi.org/book/chanzhieps/41.html';
 $config->site->help['qq']   = 'http://www.chanzhi.org/book/chanzhieps/57.html';
 

@@ -14,7 +14,7 @@ $lang->stat->keywords      = 'Keyword Stats';
 $lang->stat->keyword       = 'Keyword';
 $lang->stat->outSite       = 'Site Stats';
 $lang->stat->search        = 'Search';
-$lang->stat->domain        = 'Doamin';
+$lang->stat->domain        = 'Domain';
 $lang->stat->click         = 'Click Ranking';
 $lang->stat->link          = 'Links';
 $lang->stat->today         = 'Today';
@@ -25,7 +25,7 @@ $lang->stat->ipCount       = 'IP Count';
 $lang->stat->totalPV       = 'Total PVs';
 $lang->stat->searchEngine  = 'Sear Engine';
 $lang->stat->keywordReport = 'Keyword Stats';
-$lang->stat->domainList    = 'Domian List';
+$lang->stat->domainList    = 'Domain List';
 $lang->stat->domainTrend   = 'Trend';
 $lang->stat->domainPage    = 'Page';
 $lang->stat->percentage    = 'Percentage';
@@ -37,7 +37,7 @@ $lang->stat->begin = 'Begin';
 $lang->stat->end   = 'End';
 $lang->stat->date  = 'Date';
 
-$lang->stat->noData    = 'No data';
+$lang->stat->noData    = 'No data.';
 $lang->stat->dateError = 'Date Error';
 
 $lang->stat->itemList = new stdclass();

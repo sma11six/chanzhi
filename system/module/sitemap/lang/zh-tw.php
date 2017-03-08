@@ -12,6 +12,7 @@
  */
 $lang->sitemap->productCategory = '產品分類';
 $lang->sitemap->articleCategory = '文章分類';
+$lang->sitemap->articleList     = '文章列表';
 $lang->sitemap->blogCategory    = '博客分類';
 $lang->sitemap->boards          = '論壇版塊';
 $lang->sitemap->books           = '在綫手冊';

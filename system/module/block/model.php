@@ -492,6 +492,8 @@ class blockModel extends model
         $data->js      = helper::decodeXSS($data->js);
 
         if($data->params['top']['left'] != 'custom') $data->params['topLeftContent'] = '';
+        if($data->params['top']['right'] != 'custom') $data->params['topRightContent'] = '';
+        
         if($this->post->type == 'phpcode') $data = fixer::input('post')->add('template', $template)->get();
 
         $gpcOn = (version_compare(phpversion(), '5.4', '<') and function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc());
@@ -691,7 +693,7 @@ class blockModel extends model
      * @access private
      * @return string
      */
-    private function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
+    public function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
         $withGrid = ($withGrid and isset($block->grid));
         $isRegion = isset($block->type) && $block->type === 'region';
@@ -1154,6 +1156,7 @@ class blockModel extends model
         $this->app->loadLang('tree');
         $this->lang->category->name = $this->lang->block->planName;
 
+        $clonedPlanID = isset($plan->id) ? $plan->id : '0';
         if(isset($plan->id)) unset($plan->id);
         if(isset($plan->pathNames))unset($plan->pathNames);
 
@@ -1165,8 +1168,13 @@ class blockModel extends model
             ->check('name', 'unique', "type='{$plan->type}'")
             ->exec();
 
+        $newPlanID      = $this->dao->lastInsertID();
+        $layoutDatabase = TABLE_LAYOUT;
+        $sql = "REPLACE INTO $layoutDatabase(template, plan, page,region, object, blocks, import, lang) SELECT template,$newPlanID,page,region,object,blocks,import,lang FROM $layoutDatabase WHERE plan = $clonedPlanID;";
+        
+        $this->dao->query($sql);
         if(dao::isError()) return false;
-        return $this->dao->lastInsertID();
+        return $newPlanID;
     }
 
     /**

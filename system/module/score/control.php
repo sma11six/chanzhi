@@ -129,6 +129,13 @@ class score extends control
      */
     public function setCounts()
     {
+        if($this->session->currentGroup == 'user')
+        {
+            unset($this->lang->score->menu);
+            $this->lang->score->menu       = $this->lang->userSetting->menu;
+            $this->lang->menuGroups->score = 'userSetting';     
+        }
+        
         if($_POST)
         {
             $setting = fixer::input('post')->get();
@@ -235,6 +242,13 @@ class score extends control
      */
     public function showStateInfo()
     {
+        if($this->session->currentGroup == 'user')
+        {
+            unset($this->lang->score->menu);
+            $this->lang->score->menu       = $this->lang->userSetting->menu;
+            $this->lang->menuGroups->score = 'userSetting';     
+        }
+
         if($_POST)
         {
             ob_start();

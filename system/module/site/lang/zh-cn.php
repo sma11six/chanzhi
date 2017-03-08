@@ -64,7 +64,6 @@ $lang->site->checkEmail       = '会员邮箱绑定';
 $lang->site->filterFunction   = '过滤功能';
 $lang->site->allowedLocation  = '允许登录地区';
 $lang->site->checkSessionIP   = '后台检查IP';
-$lang->site->forceYangcong    = '后台强制洋葱登录';
 $lang->site->setsecurity      = '安全设置';
 $lang->site->setsensitive     = '敏感词设置';
 $lang->site->filterSensitive  = '敏感词过滤';
@@ -90,7 +89,6 @@ $lang->site->setUpload     = "附件上传";
 $lang->site->setRobots     = "Robots 设置";
 $lang->site->setOauth      = "开放登录";
 $lang->site->setSinaOauth  = "新浪微博接入";
-$lang->site->setYangcong   = "洋葱登录设置";
 $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用帮助";
 $lang->site->setRecPerPage = "列表数量设置";
@@ -115,10 +113,6 @@ $lang->site->statusList->pause  = '暂停';
 $lang->site->resetPasswordList = array();
 $lang->site->resetPasswordList['open']  = '开启';
 $lang->site->resetPasswordList['close'] = '关闭';
-
-$lang->site->forceYangcongList = array();
-$lang->site->forceYangcongList['open']  = '开启';
-$lang->site->forceYangcongList['close'] = '关闭';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = '开启';
@@ -174,11 +168,11 @@ $lang->site->scoreList['close'] = '禁用';
 $lang->site->cdnList['open']  = '启用';
 $lang->site->cdnList['close'] = '关闭';
 
-$lang->site->cacheTypes['close'] = '关闭';
 $lang->site->cacheTypes['file']  = '启用';
+$lang->site->cacheTypes['close'] = '关闭';
 
-$lang->site->cachePageOptions['close'] = '关闭';
 $lang->site->cachePageOptions['open']  = '开启';
+$lang->site->cachePageOptions['close'] = '关闭';
 
 $lang->site->filterFunctionList['open']  = '启用';
 $lang->site->filterFunctionList['close'] = '关闭';
@@ -194,9 +188,9 @@ $lang->site->moduleAvailable->content['book']       = '手册';
 $lang->site->moduleAvailable->user = array();
 $lang->site->moduleAvailable->user['user']       = '会员';
 $lang->site->moduleAvailable->user['forum']      = '论坛';
-$lang->site->moduleAvailable->user['message']    = '评论留言';
-$lang->site->moduleAvailable->user['submittion'] = '投稿';
 $lang->site->moduleAvailable->user['score']      = '积分';
+$lang->site->moduleAvailable->user['message']    = '评论留言';
+$lang->site->moduleAvailable->user['submission'] = '投稿';
 
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = '商城';
@@ -216,7 +210,6 @@ $lang->site->changeLocation   = '您当前的登录地区与允许登录地区�
 $lang->site->sessionIpTip     = '开启后，如IP变化将自动退出登录。';
 $lang->site->schemeTip        = '所有访问会跳转至默认访问协议。';
 $lang->site->saveDaysTip      = '访问日志保存天数必须为为 >0 的数字。';
-$lang->site->yangcongTip      = '开启强制洋葱登录后，您可以通过设置密保问题开启密保登录作为备用。';
 $lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
 $lang->site->cdnFileLost      = '以下资源无法访问：';
 $lang->site->useDefaultCdn    = '使用默认地址';
@@ -237,11 +230,6 @@ $lang->site->customizableList->reply   = '回帖列表数量';
 $lang->site->customizableList->message = '留言列表数量';
 $lang->site->customizableList->comment = '评论列表数量';
 
-$lang->site->yangcong = new stdclass();
-$lang->site->yangcong->appID = 'APP ID';
-$lang->site->yangcong->key   = 'APP KEY';
-$lang->site->yangcong->auth  = 'Auth ID';
-
 $lang->site->api = new stdclass();
 $lang->site->api->common = '集成';
 $lang->site->api->key    = '密钥';
@@ -252,15 +240,13 @@ $lang->site->api->ipTip  = '允许调用者使用这些IP访问，多个IP使用
 $lang->site->menus = array();
 $lang->site->menus['order']      = '订单';
 $lang->site->menus['message']    = '留言';
-$lang->site->menus['comment']    = '评论';
-$lang->site->menus['reply']      = '回复';
 $lang->site->menus['thread']     = '主题';
 $lang->site->menus['forumreply'] = '回帖';
 $lang->site->menus['article']    = '文章';
 $lang->site->menus['page']       = '单页';
 $lang->site->menus['blog']       = '博客';
 $lang->site->menus['book']       = '手册';
-$lang->site->menus['submittion'] = '投稿';
+$lang->site->menus['submission'] = '投稿';
 $lang->site->menus['product']    = '产品';
 $lang->site->menus['user']       = '会员';
 $lang->site->menus['wechat']     = '微信';
@@ -272,3 +258,5 @@ $lang->site->menus['security']   = '安全';
 
 $lang->site->fileAuthority = '需要修改写入文件的权限，Linux下的运行命令为<code>%s</code>';
 $lang->site->fileRequired  = '需要创建文件，Linux下的运行命令为<code>%s</code>';
+
+$lang->site->wechatLoginTip = '使用微信登录需要开启PHP的openssl扩展';

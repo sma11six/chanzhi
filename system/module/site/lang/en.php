@@ -64,7 +64,6 @@ $lang->site->checkEmail       = 'Email Binding';
 $lang->site->filterFunction   = 'Filter';
 $lang->site->allowedLocation  = 'Check Login';
 $lang->site->checkSessionIP   = 'IP Check';
-$lang->site->forceYangcong    = 'Force login by Yangcong';
 $lang->site->setsecurity      = 'Security Settings';
 $lang->site->setsensitive     = 'Sensitive Word Settings';
 $lang->site->filterSensitive  = 'Sensitive Word Filter';
@@ -90,7 +89,6 @@ $lang->site->setUpload     = "File Upload";
 $lang->site->setRobots     = "Robots Settings";
 $lang->site->setOauth      = "Open Login";
 $lang->site->setSinaOauth  = "Weibo Login Setting";
-$lang->site->setYangcong   = "Yangcong Login Setting";
 $lang->site->setQQOauth    = "QQ Login Setting";
 $lang->site->oauthHelp     = "Help";
 $lang->site->setRecPerPage = "List Settings";
@@ -115,10 +113,6 @@ $lang->site->statusList->pause  = 'Down';
 $lang->site->resetPasswordList = array();
 $lang->site->resetPasswordList['open']  = 'On';
 $lang->site->resetPasswordList['close'] = 'Off';
-
-$lang->site->forceYangcongList = array();
-$lang->site->forceYangcongList['open']  = 'On';
-$lang->site->forceYangcongList['close'] = 'Off';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = 'On';
@@ -174,11 +168,11 @@ $lang->site->scoreList['close'] = 'Off';
 $lang->site->cdnList['open']  = 'On';
 $lang->site->cdnList['close'] = 'Off';
 
-$lang->site->cacheTypes['close'] = 'Off';
 $lang->site->cacheTypes['file']  = 'On';
+$lang->site->cacheTypes['close'] = 'Off';
 
-$lang->site->cachePageOptions['close'] = 'Off';
 $lang->site->cachePageOptions['open']  = 'On';
+$lang->site->cachePageOptions['close'] = 'Off';
 
 $lang->site->filterFunctionList['open']  = 'On';
 $lang->site->filterFunctionList['close'] = 'Off';
@@ -194,9 +188,9 @@ $lang->site->moduleAvailable->content['book']       = 'Book';
 $lang->site->moduleAvailable->user = array();
 $lang->site->moduleAvailable->user['user']       = 'User';
 $lang->site->moduleAvailable->user['forum']      = 'Forum';
-$lang->site->moduleAvailable->user['message']    = 'Message';
-$lang->site->moduleAvailable->user['submittion'] = 'Submission';
 $lang->site->moduleAvailable->user['score']      = 'Points';
+$lang->site->moduleAvailable->user['message']    = 'Message';
+$lang->site->moduleAvailable->user['submission'] = 'Submission';
 
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = 'Mall';
@@ -216,7 +210,6 @@ $lang->site->changeLocation   = 'Your login location is not allowed.';
 $lang->site->sessionIpTip     = 'Once switched on，the user will logout automatically if IP changed.';
 $lang->site->schemeTip        = 'All visits will jump to default access protocol.';
 $lang->site->saveDaysTip      = 'Number of days that login log will be kept should be >0.';
-$lang->site->yangcongTip      = 'After force login by yangcong, you can set the security question to open the security login as the backup';
 $lang->site->closeScoreTip    = 'Once points deactivated, no more points will be recorded and users can keep their points.';
 $lang->site->cdnFileLost      = 'The followings can not be accessed';
 $lang->site->useDefaultCdn    = 'Use default address';
@@ -237,11 +230,6 @@ $lang->site->customizableList->reply   = 'Reply List';
 $lang->site->customizableList->message = 'Message List';
 $lang->site->customizableList->comment = 'Comment List';
 
-$lang->site->yangcong = new stdclass();
-$lang->site->yangcong->appID = 'App ID';
-$lang->site->yangcong->key   = 'App KEY';
-$lang->site->yangcong->auth  = 'Auth ID';
-
 $lang->site->api = new stdclass();
 $lang->site->api->common = 'Integration';
 $lang->site->api->key    = 'Key';
@@ -252,15 +240,13 @@ $lang->site->api->ipTip  = 'Use comma to separate IPs allowed to visit. Ip segme
 $lang->site->menus = array();
 $lang->site->menus['order']      = 'Order';
 $lang->site->menus['message']    = 'Message';
-$lang->site->menus['comment']    = 'Comment';
-$lang->site->menus['reply']      = 'Reply';
 $lang->site->menus['thread']     = 'Thread';
 $lang->site->menus['forumreply'] = 'Reply';
 $lang->site->menus['article']    = 'Article';
 $lang->site->menus['page']       = 'Page';
 $lang->site->menus['blog']       = 'Blog';
 $lang->site->menus['book']       = 'Book';
-$lang->site->menus['submittion'] = 'Submission';
+$lang->site->menus['submission'] = 'Submission';
 $lang->site->menus['product']    = 'Product';
 $lang->site->menus['user']       = 'User';
 $lang->site->menus['wechat']     = 'Wechat';
@@ -272,3 +258,5 @@ $lang->site->menus['security']   = 'Security';
 
 $lang->site->fileAuthority = 'You have to edit the privilege to write the file. In Linux, run the command <code>%s</code>.';
 $lang->site->fileRequired  = 'You have to to create the file. In Linux, run the command<code>%s</code>.';
+
+$lang->site->wechatLoginTip = 'It requires the extension openssl of php to use wechat login';

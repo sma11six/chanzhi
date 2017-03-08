@@ -11,6 +11,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->user->common    = '會員';
+$lang->user->setting   = '會員設置';
 
 $lang->user->id         = '編號';
 $lang->user->account    = '用戶名';
@@ -81,7 +82,6 @@ $lang->user->myScore         = '當前積分';
 $lang->user->buyScore        = '積分充值';
 $lang->user->addScore        = '獎勵積分';
 $lang->user->reduceScore     = '扣除積分';
-$lang->user->yangcongLogin   = '洋蔥登錄';
 $lang->user->bindAccount     = '綁定帳號';
 $lang->user->batchDelete     = '批量刪除用戶';
 $lang->user->deleteHistory   = '刪除用戶及歷史數據';
@@ -99,7 +99,7 @@ $lang->user->editProfile = '編輯信息';
 $lang->user->thread      = '我的主題';
 $lang->user->messages    = '我的消息';
 $lang->user->reply       = '我的回貼';
-$lang->user->submittion  = '我的投稿';
+$lang->user->submission  = '我的投稿';
 
 $lang->user->userHistory       = "用戶歷史數據";
 $lang->user->threadHistory     = "發帖";
@@ -108,7 +108,7 @@ $lang->user->commentHistory    = "評論";
 $lang->user->messageHistory    = "留言";
 $lang->user->orderHistory      = "訂單";
 $lang->user->addressHistory    = "地址";
-$lang->user->submittionHistory = "投稿";
+$lang->user->submissionHistory = "投稿";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";
@@ -119,7 +119,8 @@ $lang->user->inputAccountOrEmail = '請輸入用戶名或Email';
 $lang->user->inputPassword       = '請輸入密碼';
 $lang->user->searchUser          = '搜索';
 
-$lang->user->errorDeny         = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。點擊後退返回上頁。<br/> 5秒鐘後將自動返迴首頁...";
+$lang->user->errorDeny         = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。<br/>點擊後退返回上頁。5秒鐘後將自動返迴首頁...";
+$lang->user->noModuleDeny      = "抱歉，您所訪問的網站沒有開啟『<b>%s</b>』模組，如有疑問，請聯繫網站管理員。<br/>點擊後退返回上頁。5秒鐘後將自動返迴首頁...";
 $lang->user->loginFailed       = "登錄失敗，請檢查您的用戶名或密碼是否填寫正確。";
 $lang->user->identifyFailed    = "驗證失敗，請檢查您的密碼是否正確。";
 $lang->user->locked            = "用戶已經被鎖定，請%s後再重新嘗試登錄";
@@ -201,8 +202,8 @@ $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
 
-$lang->user->oauth->providers['qq']   = 'QQ';
 $lang->user->oauth->providers['sina'] = '新浪微博';
+$lang->user->oauth->providers['qq']   = 'QQ';
 
 $lang->user->oauth->typeList['sina']   = '新浪微博會員';
 $lang->user->oauth->typeList['qq']     = 'QQ會員';
@@ -241,7 +242,7 @@ $lang->user->control->menus['order']      = '<i class="icon-shopping-cart"></i> 
 $lang->user->control->menus['address']    = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
 $lang->user->control->menus['thread']     = '<i class="icon-comment"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus['reply']      = '<i class="icon-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
-$lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|submittion'; 
+$lang->user->control->menus['submission'] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|submission'; 
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = '日誌';
@@ -260,8 +261,17 @@ $lang->user->locationDenied       = '登錄地區受限，請按提示操作。'
 $lang->user->loginLocationChanged = '登錄地址發生變化，請按提示操作。';
 $lang->user->verifyFail           = '請填寫正確的驗證碼';
 $lang->user->confirmUnbind        = '您確定要解除綁定嗎？';
-$lang->user->forceYangcong        = '已開啟強制洋蔥登錄，普通登錄需要進行驗證。';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '請輸入您的網站登錄密碼';
 $lang->user->placeholder->verifyCode = '請輸入驗證郵件裡面收到的驗證碼';
+
+$lang->user->filterUsernameSensitive = '用戶名過濾';
+
+$lang->user->filterUsernameSensitiveList = array(); 
+$lang->user->filterUsernameSensitiveList['open']  = '開啟';
+$lang->user->filterUsernameSensitiveList['close'] = '關閉';
+
+$lang->user->usernameSensitive    = '用戶名敏感詞';
+$lang->user->usernameIsSensitive  = '用戶名或者真實姓名不能含有敏感詞，請修改後再提交';
+$lang->user->usernameSensitiveTip = '多個敏感詞之間請用英文逗號分隔';

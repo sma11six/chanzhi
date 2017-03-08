@@ -160,6 +160,11 @@ class upgradeModel extends model
             case '5_5':
                 $this->fixDetectDeviceConfig();
                 $this->execSQL($this->getUpgradeFile('5.5'));
+            case '5_6':
+                $this->fixSubmission();
+                $this->execSQL($this->getUpgradeFile('5.6'));
+            case '5_7':
+                $this->execSQL($this->getUpgradeFile('5.7'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -224,6 +229,8 @@ class upgradeModel extends model
             case '5_3_4'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.3.4'));
             case '5_4_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.4.1'));
             case '5_5'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.5'));
+            case '5_6'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.6'));
+            case '5_7'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.7'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -2093,4 +2100,41 @@ class upgradeModel extends model
             }
         }
     }
+
+    /**
+     * Fix the wrong spelled word to submission
+     *
+     * @access public
+     * @param  void
+     * @return void
+     */
+    public function fixSubmission()
+    {
+        $field = '';
+        $articleDatabase = TABLE_ARTICLE;
+        $rows = $this->dao->query("DESC $articleDatabase;")->fetchAll();
+        if(is_array($rows))
+        {
+            foreach($rows as $row)
+            {   
+                if(isset($row->Field))
+                {
+                    if($row->Field == 'submittion')   $field = 'submittion';
+                    if($row->Field == 'contribution') $field = 'contribution';
+                    if($row->Field == 'submission')   $field = 'submission';
+                }
+            }
+        }
+        
+        if($field == 'submittion' or $field == 'contribution')
+        {
+            $sql = "ALTER table $articleDatabase  CHANGE `$field` `submission` enum('0', '1', '2', '3') NOT NULL DEFAULT '0';";
+        }
+        else if($field == '')
+        {
+            $sql = "ALTER table $articleDatabase ADD `submission` enum('0', '1', '2', '3') NOT NULL DEFAULT '0';";
+        }
+        if(isset($sql)) $this->dao->query($sql);
+    }
 }
+

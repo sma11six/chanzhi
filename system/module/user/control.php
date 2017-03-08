@@ -35,6 +35,20 @@ class user extends control
         if(!empty($_POST))
         {
             $this->loadModel('guarder')->logOperation('ip', 'register', helper::getRemoteIP());
+            
+            if(isset($this->config->site->filterUsernameSensitive) and $this->config->site->filterUsernameSensitive == 'open' and isset($_POST['account']) and isset($_POST['realname']))
+            {
+                $dicts = !empty($this->config->site->usernameSensitive) ? $this->config->site->usernameSensitive : $this->config->sensitive;
+                $dicts = explode(',', $dicts);
+                if(!validater::checkSensitive(array($_POST['account'], $_POST['realname']), $dicts)) $this->send(array('result' => 'fail', 'message' => $this->lang->user->usernameIsSensitive));
+            }
+            if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open' and isset($_POST['account']) and isset($_POST['realname']))
+            {
+                $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
+                $dicts = explode(',', $dicts);
+                if(!validater::checkSensitive(array($_POST['account'], $_POST['realname']), $dicts)) $this->send(array('result' => 'fail', 'message' => $this->lang->user->usernameIsSensitive));
+            }
+            
             $this->user->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
@@ -139,18 +153,6 @@ class user extends control
             /* check client ip and location if login is admin. */
             if(RUN_MODE == 'admin')
             {
-                if(zget($this->config->site, 'forceYangcong') == 'open' and strtolower($this->app->getMethodName()) != 'yangconglogin')
-                {
-                    $error = $this->lang->user->forceYangcong;
-                    $pass  = $this->loadModel('guarder')->verify();
-                    $captchaUrl = $this->createLink('guarder', 'validate', "url=&target=modal&account={$this->post->account}&type=");
-                    if(!$pass)
-                    {
-                        if($this->app->getViewType() == 'json') die(helper::removeUTF8Bom(json_encode(array('result' => 'fail', 'message' => $error))));
-                        $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
-                    }
-                }
-
                 $checkIP              = $this->user->checkIP();
                 $checkAllowedLocation = $this->user->checkAllowedLocation();
                 $checkLoginLocation   = $this->user->checkLoginLocation($this->post->account);
@@ -552,7 +554,7 @@ class user extends control
             $this->lang->user->menu = $this->lang->security->menu;
             $this->lang->menuGroups->user = 'security';
         }
-
+        
         $get = fixer::input('get')
             ->setDefault('recTotal', 0)
             ->setDefault('recPerPage', 10)
@@ -560,16 +562,18 @@ class user extends control
             ->setDefault('user', '')
             ->setDefault('provider', '')
             ->setDefault('admin', '')
+            ->setDefault('orderBy', 'id_desc')
             ->get();
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($get->recTotal, $get->recPerPage, $get->pageID);
 
-        $users = $this->user->getList($pager, $get->user, $get->provider, $get->admin);
+        $users = $this->user->getList($pager, $get->user, $get->provider, $get->admin, $get->orderBy);
         
-        $this->view->users = $users;
-        $this->view->pager = $pager;
-        $this->view->title = $this->lang->user->common;
+        $this->view->orderBy  = $get->orderBy;
+        $this->view->users    = $users;
+        $this->view->pager    = $pager;
+        $this->view->title    = $this->lang->user->common;
         $this->display();
     }
 
@@ -1023,7 +1027,7 @@ class user extends control
             $this->user->checkEmail($this->post->email);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->app->user->emailCertified = 1;
-            $this->send(array('result' => 'success', 'message' => $this->lang->user->checkEmailSuccess, 'locate' => $this->post->referer));
+            $this->send(array('result' => 'success', 'message' => $this->lang->user->checkEmailSuccess, 'locate' => inlink('control')));
         }
 
         $this->view->title      = $this->lang->user->checkEmail;
@@ -1102,49 +1106,6 @@ class user extends control
     }
 
     /**
-     * Yangcong login.
-     * 
-     * @param  string $referer 
-     * @access public
-     * @return void
-     */
-    public function yangcongLogin($referer = '')
-    {
-        $uid  = $this->session->openID;
-        $user = $this->user->getUserByOpenID('yangcong', $uid);
-
-        /* If user exists login derectly.*/
-        if($user)
-        {
-            if($this->user->login($user->account, md5($user->password . $this->session->random)))
-            {
-                if($referer) $this->locate(helper::safe64Decode($referer));
-
-                /* No referer, go to the user control panel. */
-                $default = $this->config->user->default;
-                $this->locate($this->createLink($default->module, $default->method));
-            }
-            exit;
-        }
-
-        if($this->get->referer != false)
-        {
-            if(!empty($referer))
-            {
-                $this->referer = helper::safe64Decode($referer);
-            }
-            else
-            {
-                $this->referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-            }
-        }
-
-        $this->view->title   = $this->lang->user->login->common;
-        $this->view->referer = $referer;
-        die($this->display());
-    }
-
-    /**
      * Set security question.
      *
      * @access public
@@ -1175,6 +1136,43 @@ class user extends control
 
         $this->view->title = $this->lang->user->checkContact;
         $this->view->user  = $user;
+        $this->display();
+    }
+
+    /**
+     * Set the setting of user
+     *
+     * @access public
+     * @param  void
+     * @return string
+     */
+    public function setting()
+    {
+        if($this->session->currentGroup == 'user')
+        {
+            unset($this->lang->user->menu);
+            $this->lang->user->menu       = $this->lang->userSetting->menu;
+            $this->lang->menuGroups->user = 'userSetting';     
+        }
+
+        if($this->session->currentGroup == 'setting')
+        {
+            unset($this->lang->user->menu);
+            $this->lang->user->menu       = $this->lang->security->menu;
+            $this->lang->menuGroups->user = 'security';     
+        }
+        
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setting')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->user->setting;
         $this->display();
     }
 }

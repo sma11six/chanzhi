@@ -270,6 +270,8 @@ class ui extends control
      */
     public function uploadTheme()
     {
+        $this->app->loadLang('file');
+        
         set_time_limit(0);
         $canManage = array('result' => 'success');
         if(!$this->loadModel('guarder')->verify()) $canManage = $this->loadModel('common')->verifyAdmin();
@@ -295,9 +297,13 @@ class ui extends control
             $this->app->loadLang('package');
             $this->send(array('result' => 'success', 'message' => $this->lang->package->successUploadedPackage, 'locate' => $link));
         }
-
-        $this->view->canManage = $canManage;
-        $this->view->title     = $this->lang->ui->uploadTheme;
+        
+        $this->view->files          = array();
+        $this->view->showSetPrimary = false;
+        $this->view->objectType     = 'themePackage'; 
+        $this->view->objectID       = 'theme'; 
+        $this->view->canManage      = $canManage;
+        $this->view->title          = $this->lang->ui->uploadTheme;
         $this->display();
     }
 
@@ -317,7 +323,7 @@ class ui extends control
 
         $this->view->error = '';
         $this->view->title = $this->lang->ui->installTheme;
-
+        
         if($type == 'full')
         {
             $backup = $this->loadModel('backup')->backupAll();
@@ -327,7 +333,7 @@ class ui extends control
                 die($this->display());
             }
         }
-
+        
         /* Ignore merge blocks before blocks imported. */
         $this->view->blocksMerged = true;
 
@@ -528,6 +534,20 @@ class ui extends control
      */
     public function setDevice($device)
     {
+        if($device == 'mobile')
+        {
+            $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';
+            if($mobileTemplate == 'close')
+            {
+                $deviceConfig = new stdclass;
+                $deviceConfig->detectDevice = true;
+
+                $result = $this->loadModel('site')->setSystem($deviceConfig);
+                if(isset($result['result']) and $result['result'] == 'fail') $this->send($result);
+                if($setting->mobileTemplate == 'close') $this->session->set('device', 'desktop');
+            }
+        }
+
         $this->session->set('device', $device);
 
         $template = $this->config->template->{$device};

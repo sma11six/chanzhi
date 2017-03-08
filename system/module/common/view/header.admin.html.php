@@ -18,7 +18,6 @@
   }
   if(!commonModel::isAvailable('user'))
   {
-    unset($lang->groups->shop);
     unset($lang->groups->user);
   }
   foreach ($lang->groups as $menuGroup => $groupSetting)
@@ -52,12 +51,8 @@
     <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
     <ul class='nav navbar-nav'>
       <li class='device-nav'>
-        <?php $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';?>
-        <?php if($mobileTemplate == 'close'):?>
-        <?php echo html::a('javascript:;', $lang->ui->deviceList->desktop);?>
-        <?php else:?>
         <a href='javascript:;' data-toggle='dropdown'>
-          <?php echo "<strong>" . $lang->ui->deviceList->{$currentDevice} . "</strong>";?> <i class='icon-caret-down'></i>
+          <?php echo "<strong>" . strip_tags($lang->ui->deviceList->{$currentDevice}) . "</strong>";?> <i class='icon-caret-down'></i>
         </a>
         <ul class='dropdown-menu'>
           <?php foreach($lang->ui->deviceList as $device => $name):?>
@@ -65,7 +60,6 @@
           <li <?php echo $class;?>><a href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
           <?php endforeach;?>
         </ul>
-        <?php endif;?>
       </li>
       <li class='divider'></li>
     </ul>
@@ -122,3 +116,20 @@
     <?php endif;?>
   <?php endif;?>
   <?php endif;?>
+<?php if($this->session->currentGroup == 'design' and !$config->framework->detectDevice[$this->app->clientLang]):?>
+<script>
+$(document).ready(function()
+{
+    $("#mainNavbarCollapse .dropdown-menu a[href*='m=ui&f=setdevice&device=mobile']").click(function()
+    {
+        var url = $(this).attr('href');
+        bootbox.confirm('<?php echo $lang->ui->openMobileTemplate ?>', function(result)
+        {
+            if(result) location.href = url;
+            return true; 
+        });
+        return false;
+    });
+});
+</script>  
+<?php endif;?>

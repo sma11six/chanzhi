@@ -286,7 +286,7 @@ class installModel extends model
      */
     public function importDemoData()
     {
-        $demoDataFile = $this->app->getAppRoot() . 'db/demo.sql';
+        $demoDataFile = $this->app->getAppRoot() . 'db/demo.' . $this->app->clientLang .  '.sql';
         $insertTables = explode(";\n", file_get_contents($demoDataFile));
         foreach($insertTables as $table)
         { 

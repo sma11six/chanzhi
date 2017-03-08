@@ -11,7 +11,6 @@
  */
 include '../../common/view/header.lite.html.php';
 ?>
-<?php if(isset($locate)) echo " <meta http-equiv='refresh' content=\"5;url=$locate\">"?>
 <style>
 .alert.with-icon > .icon, .alert.with-icon > .icon + .content {padding: 20px 20px 20px;}
 .alert.with-icon > .icon {padding-left: 35px;}
@@ -30,4 +29,22 @@ include '../../common/view/header.lite.html.php';
   </div>
 </div>
 </body>
+<script>
+$(function()
+{
+    setInterval(function()
+    {
+        var countDown = $('#countDown');
+        var count = parseInt(countDown.text());
+        if(count > 1)
+        {
+            countDown.text(count-1);
+        }
+        else
+        {
+            window.location.href = $('.btn-redirec').attr('href');
+        }
+    }, 1000);
+})
+</script>
 </html>

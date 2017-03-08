@@ -281,16 +281,12 @@ class site extends control
         {
             $provider = $this->post->provider;
             $oauth    = array($provider => helper::jsonEncode($_POST));
+
             $result   = $this->loadModel('setting')->setItems('system.common.oauth', $oauth);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
         $this->view->setting = array();
-
-        if(!empty($this->config->site->yangcong))
-        {
-            $this->view->setting = json_decode($this->config->site->yangcong);
-        }
 
         $this->view->title = $this->lang->site->setOauth;
         $this->display();
@@ -398,24 +394,6 @@ class site extends control
     }
   
     /**
-     * set yangcong configure.
-     * 
-     * @access public
-     * return void
-     */
-    public function setYangcong()
-    {
-        if(!empty($_POST))
-        {
-            $setting = fixer::input('post')->get();
-            foreach($setting as $key => $value) $value = trim($value);
-            $result  = $this->loadModel('setting')->setItem('system.common.site.yangcong', helper::jsonEncode($setting), "all");
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-    }
-
-    /**
      * Set api config.
      * 
      * @access public
@@ -471,11 +449,11 @@ class site extends control
      */
     public function setHomeMenu()
     {
-        if($_POST)
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $this->loadModel('setting')->setItem('system.common.menus.home', 'admin,' . implode(',', $this->post->homeMenus));
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('sethomemenu')));
         }
         if($this->cookie->currentGroup == 'home') 
         {
